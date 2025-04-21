@@ -5,7 +5,6 @@ const withMDX = createMDX();
 /** @type {import('next').NextConfig} */
 const config = {
   reactStrictMode: true,
-  reactStrictMode: true,
   // -- 添加以下配置 --
   // 确保开启静态导出
   output: 'export', 
