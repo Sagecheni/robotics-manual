@@ -1,0 +1,91 @@
+---
+title: 关于 ROS noetic 工作空间和一些相关说明
+description: 在 Linux 内核操作系统宿主机中构建 ROS noetic 工作空间
+---
+
+### 什么是 Docker
+
+Docker 是一个开源的应用程序容器引擎，允许开发者将应用程序及其依赖项打包到一个轻量级、可移植的容器中。Docker 容器可以在任何支持 Docker 的操作系统上运行，从而简化了软件的部署和管理。
+
+### 什么是 ROS
+
+ROS 是用于机器人开发的下一代软件库。尽管 ROS 代表机器人操作系统，但它并不是像 Windows 或 Ubuntu 那样的操作系统，而是作为机器人技术的软件开发工具包。
+
+### 什么是 X Server
+
+X Server 是一个用于 Linux 和 Unix 系统的窗口系统。它提供了图形用户界面 (GUI) 的基础设施，使用户能够与计算机进行交互。
+
+`xhost +local:docker` 命令允许 Docker 容器访问 X Server，从而使容器内的应用程序能够在宿主机的显示器上显示图形界面。
+
+### 文件夹结构
+
+以下这种文件夹结构，在 ROS/vscode 开发中非常典型。
+
+上层目录是您在 VSCode 中打开的文件夹。它包含特殊的文件夹 .devcontainer 和 .vscode，VSCode 使用它们来加载您的工作区和首选项。
+
+ROS 代码位于 src 目录中，在文件夹中组织为包。
+
+```
+--[ base_folder
+    |--[ .devcontainer
+        |-- devcontainer.json
+        |-- Dockerfile
+    |--[ .vscode
+    |--[ src
+        |-- <ros packages>
+```
+
+### 设置开发容器
+
+你需要一个 `.devcontainer` 文件来让 VSCode 知道如何将 Docker 容器挂载为工作区，例如：
+
+``` dockerfile
+// See https://aka.ms/vscode-remote/devcontainer.json for format details.
+{
+    "context": "../",
+    "dockerFile": "Dockerfile",
+    // This will launch the container as a non-root user
+    "remoteUser" : "ros",
+    "runArgs": [
+        // This will allow you to use a ptrace-based debugger like C++, Go, and Rust.
+        "--cap-add=SYS_PTRACE",
+        "--security-opt", "seccomp=unconfined",
+    ],
+    // These are the extensions I like to use with ROS2
+    "extensions": [
+        "ms-azuretools.vscode-docker",
+        "ms-python.python",
+        "ms-vscode.cpptools",
+        "twxs.cmake",
+        "ms-vscode.cmake-tools",
+        "ms-iot.vscode-ros",
+        "smilerobotics.urdf",
+        "yzhang.markdown-all-in-one"
+    ]
+}
+```
+
+对于其中部分内容的解释：
+
+#### remoteUser
+
+用户名应该与 Docker 容器中的非 root 用户相匹配。VSCode 将更新该用户的用户 ID/组 ID 以匹配你的用户 ID/组 ID，以便在容器中创建的文件将具有你的用户 ID/组
+
+#### runArgs
+
+这些是你想要传递给 docker run 命令的参数，在 Rebuild 时候会发挥作用。 
+
+#### extensions
+
+扩展是你希望在容器中拥有的 VSCode 插件。通过在容器中托管它们，你可以确保为自己安装和配置特定的拓展。
+
+#### Run task
+
+在容器中，你可以使用 VSCode 的任务功能来自动化构建、测试和其他常见的开发任务。你可以在 `.vscode/tasks.json` 文件中定义这些任务。
+
+## What is Next?
+
+<Cards>
+  <Card title="Learn more about Next.js" href="https://nextjs.org/docs" />
+  <Card title="Learn more about Fumadocs" href="https://fumadocs.vercel.app" />
+</Cards>
