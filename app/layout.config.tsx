@@ -13,11 +13,5 @@ export const baseOptions: BaseLayoutProps = {
         title: <ThemeAwareIconTitle />,
     },
     links: [
-        {
-            text: "Documentation",
-            url: "/docs",
-            active: "nested-url",
-        },
-        
     ],
 };
