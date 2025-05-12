@@ -10,7 +10,7 @@ description: 在 Linux 内核操作系统宿主机构建 ROS noetic 工作空间
 ## 用法
 
 > *该部分展示的用法属于无脑跟做版，想了解更多信息以及为什么要这么做，请阅读相关说明部分*
-> 首先我假设你已经正确安装 vscode https://code.visualstudio.com/, 能够正确配置网络代理（科学上网），并对 Ubuntu 操作系统的命令行有一定的了解
+> 首先我假设你已经正确安装 [vscode](https://code.visualstudio.com/), 能够正确配置网络代理（科学上网），并对 Ubuntu 操作系统的命令行有一定的了解
 
 1. 在宿主机（非docker）终端**授权 Docker 连接 X Server**
 
@@ -20,11 +20,11 @@ description: 在 Linux 内核操作系统宿主机构建 ROS noetic 工作空间
 
 2. 在宿主机安装 Docker engine（**不是Docker Desktop！！！**）
 
-   具体教程参考 https://www.cnblogs.com/lqqgis/p/18276118
+   具体教程请参考 [ubuntu 20.04 国内源安装docker](https://www.cnblogs.com/lqqgis/p/18276118)
 
-   如果是在windows下启动本容器则需要 Docker Desktop，请跳转到
+   如果是在windows下启动本容器则需要 Docker Desktop，请跳转到Windows版本操作手册
 
-3. 点击 “use this template”，创建你自己的存储库
+3. 在项目的默认分支（forLinux）点击 “use this template”，创建你自己的存储库
 
     Click on "use this template"，Create your repository  
     
@@ -50,7 +50,7 @@ description: 在 Linux 内核操作系统宿主机构建 ROS noetic 工作空间
     
     If you open a terminal inside VSCode (Terminal->New Terminal), you should see that your username has been changed to `ros`, and the bottom left green corner should say "Dev Container"
 
-9. ~~在Coppeliasim官网 https://www.coppeliarobotics.com/ 安装 Ubuntu20.04 x86_64 版本Coppeliasim并解压到本项目~~  
+9. ~~[在Coppeliasim官网](https://www.coppeliarobotics.com/) 安装 Ubuntu20.04 x86_64 版本Coppeliasim并解压到本项目~~  
     > 现在已知的情况是，我们的 ROS noetic 和原环境中的代码对 4.1.0 版本的 Coppeliasim 的支持会更好... 但是由于 Github 大文件限制（LFS），我们无法直接上传该版本的 Coppeliasim，大家可以从机房 Copy 或自行下载
    
     ```
@@ -67,4 +67,4 @@ description: 在 Linux 内核操作系统宿主机构建 ROS noetic 工作空间
 ## Notice
 
 > 1. Dockerfile中可更改部分已注释标出，其余部分请勿擅自修改
-> 2. 有些情况下如果无法执行某些任务，新建终端或者重启容器基本上都能解决
+> 2. 极特殊情况下如果无法执行某些任务，新建终端或者重启容器基本上都能解决
