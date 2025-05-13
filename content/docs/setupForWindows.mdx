@@ -6,7 +6,15 @@ import { Step, Steps } from 'fumadocs-ui/components/steps';
 
 ## Pre To Do
 
-打开Docker
+### VSCode
+- 已经安装Docker、DevContainer 两个插件。
+
+### WSL
+- 已经安装 WSL2(本人测试时使用的是 Ubuntu 24.04 LTS，实际上 Ubuntu 22.04 LTS 或者其他发行版应该都可以)
+
+### Docker
+- General -> Use the WSL 2 based engine ✅
+
 
 ## Follow Steps
 
@@ -16,13 +24,31 @@ import { Step, Steps } from 'fumadocs-ui/components/steps';
     ```bash
     git clone -b win git@github.com:yuchenlogin/BUPT-ROS-noetic-workspace.git
     ```
+    项目很大，网速不好时候，git Clone时需要等待。
   </Step>
   <Step>
     ### 使用Vscode 打开项目文件夹
-    需要Vscode已经下载Docker插件和Dev container插件.
   </Step>
   <Step>
     ### 构建容器
-
+    如果发现右下角有弹窗显示`Open in devcontainer`，点击打开即可，若无则可以<kbd>Ctrl</kbd>+<kbd>Shift</kbd>+<kbd>P</kbd>打开命令行，然后选择 `Dev Containers:Rebuild Container`。
+  </Step>
+  <Step>
+    ### 编译
+    在`/workspace`目录下输入下面代码对 src 中的 pkgs 进行编译，由于包含的pakgs 比较多，所以编译会耗时且吃性能。
+    ```bash
+    catkin_make
+      ```
+  </Step>
+  <Step>
+    ### Enjoy
+    编译成功后可以重新打开这个 DevContainer，然后 Just Enjoy!
   </Step>
 </Steps>
+
+
+## Notes
+
+- Windows版本的容器环境包含了除了 SLAM 以外机房机器内catkin_ws 的所有 Pkgs，你可以选择性地进行删除或添加以满足自己的需求。
+
+- 如有疑问可以到[BUPT-ROS-noetic-workspace](https://github.com/yuchenlogin/BUPT-ROS-noetic-workspace)中向我们提出 issue.
